@@ -177,14 +177,20 @@ function figToBinaryParts(fileBuffer: ArrayBuffer | Buffer): Uint8Array[] {
 
 
 export const toJSON = (filePath: string) => {
-  const fileBuffer = fs.readFileSync(path.join(__dirname, filePath))
+  const dir = path.dirname(filePath);
+  const name = path.basename(filePath);
+  const out = path.join(dir, name.split('.')[0]);
+  const fileBuffer = fs.readFileSync(out)
   const json = figToJson(fileBuffer)
-  fs.writeFileSync(path.join(__dirname, "./out.json"), JSON.stringify(json, undefined, 2))
+  fs.writeFileSync(path.join(out, `${name}.json`), JSON.stringify(json, undefined, 2))
 }
 export const toFig = (filePath: string) => {
-  const fileStr = fs.readFileSync(path.join(__dirname, filePath), {
+  const dir = path.dirname(filePath);
+  const name = path.basename(filePath);
+  const out = path.join(dir, name.split('.')[0]);
+  const fileStr = fs.readFileSync(path.join(out, filePath), {
     encoding: 'utf8'
   })
   const fig = jsonToFig(JSON.parse(fileStr))
-  fs.writeFileSync(path.join(__dirname, "./out.fig"), fig)
+  fs.writeFileSync(path.join(out, `${name}.fig`), fig)
 }

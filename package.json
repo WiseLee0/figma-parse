@@ -1,6 +1,6 @@
 {
-  "name": "figma-parser",
-  "version": "1.0.0",
+  "name": "fig-parser",
+  "version": "1.0.1",
   "bin": {
     "fig": "dist/cli.js"
   },
